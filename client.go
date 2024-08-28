@@ -8,10 +8,10 @@ import (
 type M map[string]string
 
 type Client struct {
-	tls     cycletls.CycleTLS
-	headers M
-	ja3     string
-	agent   string
+	tls       cycletls.CycleTLS
+	Headers   M
+	Ja3       string
+	UserAgent string
 }
 
 func New() (*Client, error) {
@@ -22,33 +22,33 @@ func New() (*Client, error) {
 }
 
 func (c Client) Do(url string, opt cycletls.Options, method string) (cycletls.Response, error) {
-	for k, v := range c.headers {
+	for k, v := range c.Headers {
 		opt.Headers[k] = v
 	}
-	if opt.UserAgent == "" {
-		opt.UserAgent = c.agent
-	}
 	if opt.Ja3 == "" {
-		opt.Ja3 = c.ja3
+		opt.Ja3 = c.Ja3
+	}
+	if opt.UserAgent == "" {
+		opt.UserAgent = c.UserAgent
 	}
 	return c.tls.Do(url, opt, method)
 }
 
 func (c Client) Get(url string, headers M) (cycletls.Response, error) {
 	opt := cycletls.Options{
-		UserAgent: c.agent,
 		Headers:   headers,
-		Ja3:       c.ja3,
+		Ja3:       c.Ja3,
+		UserAgent: c.UserAgent,
 	}
 	return c.Do(url, opt, http.MethodGet)
 }
 
 func (c Client) Post(url string, headers M, body string) (cycletls.Response, error) {
 	options := cycletls.Options{
-		Ja3:       c.ja3,
-		Body:      body,
-		UserAgent: c.agent,
 		Headers:   headers,
+		Ja3:       c.Ja3,
+		UserAgent: c.UserAgent,
+		Body:      body,
 	}
 	return c.Do(url, options, http.MethodPost)
 }

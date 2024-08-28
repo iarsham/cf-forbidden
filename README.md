@@ -22,7 +22,7 @@ go get -u github.com/iarsham/cf_forbidden
 package main
 
 import (
-    cf "github.com/iarsham/cf_forbidden"
+    cf "github.com/iarsham/cf-forbidden"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 ```
 ### 2. Set Custom Headers (Optional):
 ```go
-client.headers = cf.M{
+client.Headers = cf.M{
     "X-Custom-Header": "value",
 }
 ```
@@ -42,8 +42,8 @@ client.headers = cf.M{
 
 ### 3. Set UserAgent and JA3 Fingerprint (Optional):
 ```go
-client.agent = "My Custom User Agent"
-client.ja3 = "your_ja3_fingerprint"
+client.UserAgent = "My Custom User Agent"
+client.Ja3 = "your_ja3_fingerprint"
 ```
 
 
