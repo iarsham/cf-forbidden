@@ -11,7 +11,7 @@ cf_forbidden is a Go package designed to make HTTP requests to websites protecte
 ## Installation
 
 ```bash
-go get -u github.com/iarsham/cf_forbidden
+go get -u github.com/iarsham/cf-forbidden
 ```
 
 ## Usage
